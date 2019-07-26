@@ -29,28 +29,36 @@ print()
 有个内建函数，就是用来把一个 “可迭代对象”（Iterable）转换成 “迭代器”（Iterator）的 —— `iter()`。
 
 ```python
+from IPython.core.interactiveshell import InteractiveShell
+InteractiveShell.ast_node_interactivity = "all"
+
 i = iter("Python")
-print(type(i))
+type(i)
 s = iter((1, 2, 3, 4, 5))
-print(type(s))
+type(s)
 L = iter(['item 1', 'item 2', 3, 5])
-print(type(L))
+type(L)
 ```
 
     str_iterator
+    
     tuple_iterator
+    
     list_iterator
 
 迭代器如何使用呢？有个 `next()` 函数：
 
 ```python
+from IPython.core.interactiveshell import InteractiveShell
+InteractiveShell.ast_node_interactivity = "all"
+
 i = iter("Python")
-print(next(i))
-print(next(i))
-print(next(i))
-print(next(i))
-print(next(i))
-print(next(i))
+next(i)
+next(i)
+next(i)
+next(i)
+next(i)
+next(i)
 # next(i) 前面已经到 'n' 了，再调用就会有 StopIteration 错误提示。
 ```
 
@@ -83,17 +91,12 @@ class Counter(object):
         return c
 
 c = Counter(11, 20)
-print(next(c))
-print(next(c))
-print(next(c))
+next(c)
+next(c)
+next(c)
 for c in Counter(101, 105):
-<<<<<<< HEAD
     print(c, end=', ')
 type(Counter)
-=======
-    print(c, sep=', ')
-print(type(Counter))
->>>>>>> site
 ```
 
     11
@@ -300,7 +303,7 @@ def a_func():
         print("Hi, I'm b_func!")
     print("Hi, I'm a_func!")
     return b_func
-print(a_func())
+a_func()
 ```
 
     Hi, I'm a_func!
@@ -354,7 +357,7 @@ def a_func():
     print("Hi, I'm a_func!")
 
 a_func()
-print(a_decorator(a_func))
+a_decorator(a_func)
 ```
 
     Hi, I'm a_func!

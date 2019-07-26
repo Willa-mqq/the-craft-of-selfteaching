@@ -1,9 +1,6 @@
 
 # 可执行的 Python 文件
 
-> [!NOTE]
-> GitPress 使用的 Python 暂不支持文件，有的代码无法运行。为了更好的阅读体验，请在本地运行 Jupyter 阅读本章内容。
-
 理论上来讲，你最终可以把任何一个程序，无论大小，都封装（或者囊括）到仅仅一个函数之中。按照惯例（Convention），这个函数的名称叫做 `main()`：
 
 ```python
@@ -26,7 +23,6 @@ def main():
     routine_2()
     print('This is the end of the program.')
 
-# 在 GitPress 中，当前模块并非 __main__，因此请注释下面一行，直接调用 main 函数
 if __name__ == '__main__':
     main()
 ```
@@ -87,7 +83,7 @@ print("".join([d.get(c, c) for c in s]))
 
 所以，只要 `import this`，`this.py` 中的代码就被执行：
 
-```python,ignore
+```python
 import this
 ```
 
@@ -131,7 +127,7 @@ if __name__ == '__main__':
 
 于是，当你在其它地方导入它的时候，`import that`，`main()` 函数的内容不会被执行：
 
-```python,ignore
+```python
 import that
 ```
 
@@ -149,14 +145,14 @@ python -m that
 
 像 `that.py` 那样把整个程序放进 `main()` 函数之后，`import that` 不会自动执行 main 函数里的代码。不过，你可以调用 that.main()：
 
-```python,ignore
+```python
 import that
 that.main()
 ```
 
 当然，`that.py` 之中没有任何 Docstring，所以 `help(that)` 的结果是这样的：
 
-```python,ignore
+```python
 import that
 help(that)
 ```
@@ -196,7 +192,7 @@ if __name__ == '__main__':
 
 顺带说，`import this` 的彩蛋有更好玩的玩法：
 
-```python,ignore
+```python
 from IPython.core.interactiveshell import InteractiveShell
 InteractiveShell.ast_node_interactivity = "all"
 
@@ -218,7 +214,7 @@ love is not True or False; love is love # True True
 
 在 Terminal 里输入 `python ⏎` 而后在 Interactive Shell 里逐句输入试试。`love = this` 后面的每一句，都是布尔运算，想想看为什么是那样的结果？
 
-```python,ignore
+```python
 import this
 love = this
 
@@ -242,7 +238,7 @@ love is not True or False; love is love
 
 注意以下代码中，`id()` 函数的输出结果：
 
-```python,ignore
+```python
 from IPython.core.interactiveshell import InteractiveShell
 InteractiveShell.ast_node_interactivity = "all"
 

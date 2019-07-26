@@ -35,7 +35,7 @@ for c in 'Python':
 
 在 Python 出现之前，想要完成这样一个访问字符串中的每一个字符的循环，大抵上应该是这样的（比如 C 语言）：
 
-```cpp,ignore
+``` C
 # Written in C
 char *string;
 
@@ -43,9 +43,9 @@ scanf("%s",string);
 int i=strlen(string);
 int k = 0;
 while(k<i){
-    printf("%c", string[k]);
-    k++;
-}
+      printf("%c", string[k]);
+      k++;
+  }
 ```
 
  在 Python 中，简单的 for 循环，只需要指定一个次数就可以了，因为有 range() 这个函数：
@@ -66,21 +66,13 @@ for i in range(10):
     8
     9
 
-即便是用比 C 更为 “现代” 一点的 JavaScript，大抵上应该这样写：
+即便是用比 C 更为 “现代” 一点的 JavaScript，也大抵上应该是这样的：
 
-```javascript
+```c
 var i;
 for (i = 0; i < 10; i++) {
   console.log(i)
 }
-```
-
-或者用函数 `forEach` 的语法糖：
-
-```javascript
-[...Array(10).keys()].forEach((x) => {
-  console.log(x)
-})
 ```
 
 当然，有时候我们也需要比较复杂的计数器，不过，Python 也不只有 `for` 循环，还有 `while` 循环，在必要的时候可以写复杂的计数器。
@@ -95,10 +87,10 @@ for (i = 0; i < 10; i++) {
 
 生成一个列表，有以下几种方式：
 
-```python,ignore
+```python
 a_list = []
 b_list = [1, 2, 3]
-list() # or list(iterable) # 这是 Type Casting
+list(), or list(iterable)            # 这是 Type Casting
 [(expression with x) for x in iterable]
 ```
 
@@ -124,8 +116,7 @@ print(c_list, f'has a length of {len(c_list)}.')
 这最后一种方式颇为神奇：
 
 ```python
-a = [2**x for x in range(8)]
-print(a)
+[2**x for x in range(8)]
 ```
 
 这种做法，叫做 **[List Comprehension](https://docs.python.org/3.7/tutorial/datastructures.html#tut-listcomps)**。
@@ -161,7 +152,10 @@ print(f'... and it has {len(b_list)} even numbers: {b_list}')
 
 而后两个列表也和两个字符串一样，可以被比较，即，可以进行逻辑运算；比较方式也跟字符串一样，从两个列表各自的第一个元素开始逐个比较，“一旦决出胜负马上停止”：
 
-```python,ignore
+```python
+from IPython.core.interactiveshell import InteractiveShell
+InteractiveShell.ast_node_interactivity = "all"
+
 a_list = [1, 2, 3]
 b_list = [4, 5, 6]
 c_list = a_list + b_list * 3
@@ -378,10 +372,7 @@ print('the sorted reversely:\n', b_list)
     the sorted reversely:
      ['Ul', 'Ta', 'Rp', 'Pv', 'Nl', 'Nc', 'Mh', 'Gu', 'By', 'Bu']
 
-> [!NOTE]
-> **注意**：不能乱比较…… 被比较的元素应该是同一类型 —— 所以，不是由同一种数据类型元素构成的列表，不能使用 `sort()` Method。
-
-下面的代码会报错：
+**注意**：不能乱比较…… 被比较的元素应该是同一类型 —— 所以，不是由同一种数据类型元素构成的列表，不能使用 `sort()` Method。下面的代码会报错：
 
 ```python
 a_list = [1, 'a', 'c']
@@ -554,7 +545,7 @@ print(a_list)
 
 创建一个元组的时候，用圆括号：
 
-```python,ignore
+```python
 a = ()
 ```
 
@@ -569,17 +560,19 @@ a = 1, 2, 3   # 不建议这种写法
 b = (1, 2, 3) # 在创建元组的时候建议永远不省略圆括号……
 print(a)
 print(b)
-print(a == b)
+a == b
 ```
 
     (1, 2, 3)
     (1, 2, 3)
     True
 
-> [!NOTE]
-> **注意**：创建单个元素的元组，无论是否使用圆括号，在那唯一的元素后面一定要*补上一个逗号* `,`：
+**注意**：创建单个元素的元组，无论是否使用圆括号，在那唯一的元素后面一定要*补上一个逗号* `,`：
 
-```python,ignore
+```python
+from IPython.core.interactiveshell import InteractiveShell
+InteractiveShell.ast_node_interactivity = "all"
+
 a = 2, # 注意这个末尾的逗号 , 它使得 a 变量被定义为一个元组，而不是数字
 a
 
@@ -623,12 +616,15 @@ print(id(a)) # id 并不相同 —— 实际上是在内存中另外新创建了
 初学者总是很好奇 List 和 Tuple 的区别。首先是使用场景，在将来需要更改的时候，创建 List
 ；在将来不需要更改的时候，创建 Tuple。其次，从计算机的角度来看，Tuple 相对于 List 占用更小的内存。
 
-```python,ignore
+```python
+from IPython.core.interactiveshell import InteractiveShell
+InteractiveShell.ast_node_interactivity = "all"
+
 n = 10000 #@param {type:"number"}
 a = range(n)
 b = tuple(a) # 把 a 转换成元组
 c = list(a) # 把 a 转换成列表
-a.__sizeof__() # GitPress 中的 Python 不支持 __sizeof__() 方法
+a.__sizeof__()
 b.__sizeof__()
 c.__sizeof__()
 ```
@@ -649,7 +645,7 @@ c.__sizeof__()
 
 ```python
 primes = {2, 3, 5, 7, 11, 13, 17}
-print(primes)
+primes
 ```
 
     {2, 3, 5, 7, 11, 13, 17}
@@ -659,10 +655,13 @@ print(primes)
 注意：创建空集合的时候，必须用 `set()`，而不能用 `{}`:
 
 ```python
+from IPython.core.interactiveshell import InteractiveShell
+InteractiveShell.ast_node_interactivity = "all"
+
 a = {} # 注意这样创建的是一个 dict（字典），而不是 set 集合
 b = set() # 这样创建的才是空集合
-print(type(a))
-print(type(b))
+type(a)
+type(b)
 ```
 
     dict
@@ -671,14 +670,17 @@ print(type(b))
 也可以将序列数据转换（Casting）为集合。转换后，返回的是一个已**去重**的集合。
 
 ```python
+from IPython.core.interactiveshell import InteractiveShell
+InteractiveShell.ast_node_interactivity = "all"
+
 a = "abcabcdeabcdbcdef"
 b = range(10)
 c = [1, 2, 2, 3, 3, 1]
 d = ('a', 'b', 'e', 'b', 'a')
-print(set(a))
-print(set(b))
-print(set(c))
-print(set(d))
+set(a)
+set(b)
+set(c)
+set(d)
 ```
 
     {'a', 'b', 'c', 'd', 'e', 'f'}
@@ -691,7 +693,7 @@ Set 当然也可以进行 *Comprehension*：
 ```python
 a = "abcabcdeabcdbcdef"
 b = {x for x in a if x not in 'abc'}
-print(b)
+b
 ```
 
     {'d', 'e', 'f'}
@@ -713,7 +715,7 @@ print(b)
 
 假定两个集合中有些人是 admins，有些人是 moderators：
 
-```python,ignore
+```python
 admins = {'Moose', 'Joker', 'Joker'}
 moderators = {'Ann', 'Chris', 'Jane', 'Moose', 'Zero'}
 ```
@@ -724,13 +726,13 @@ moderators = {'Ann', 'Chris', 'Jane', 'Moose', 'Zero'}
 admins = {'Moose', 'Joker', 'Joker'}
 moderators = {'Ann', 'Chris', 'Jane', 'Moose', 'Zero'}
 
-print(admins)                 # 去重自动完成
-print('Joker' in admins)      # Joker 是否是 admins？
-print('Joker' in moderators)  # Joker 是否是 moderator？
-print(admins | moderators)    # admins、moderator，或者身兼两职的，即，两个角色中的所有人 in admins or moderators or both
-print(admins & moderators)    # 既是 admins 又是 moderator 的都有谁？in both admins and moderators
-print(admins - moderators)    # 是 admins 但不是 moderator 的都有谁？in admins but not in moderators
-print(admins ^ moderators)    # admins 和 moderator 中不是身兼两职的都有谁？in admins or moderator but not both
+admins                 # 去重自动完成
+'Joker' in admins      # Joker 是否是 admins？
+'Joker' in moderators  # Joker 是否是 moderator？
+admins | moderators    # admins、moderator，或者身兼两职的，即，两个角色中的所有人 in admins or moderators or both
+admins & moderators    # 既是 admins 又是 moderator 的都有谁？in both admins and moderators
+admins - moderators    # 是 admins 但不是 moderator 的都有谁？in admins but not in moderators
+admins ^ moderators    # admins 和 moderator 中不是身兼两职的都有谁？in admins or moderator but not both
 ```
 
     {'Joker', 'Moose'}
@@ -741,8 +743,8 @@ print(admins ^ moderators)    # admins 和 moderator 中不是身兼两职的都
     {'Joker'}
     {'Ann', 'Chris', 'Jane', 'Joker', 'Zero'}
 
-```python,ignore
-# 这个 cell 集合运算图示需要安装 matplotlib 和 matplotlib-venn，请在本地计算机运行
+```python
+# 这个 cell 集合运算图示需要安装 matplotlib 和 matplotlib-venn
 # !pip install matplotlib
 # !pip install matplotlib-venn
 import matplotlib.pyplot as plt
@@ -775,13 +777,16 @@ plt.show()
 对于集合，推荐更多使用 Methods 而不是操作符的主要原因是：更易读 —— 对人来说，因为有意义、有用处的代码终将需要人去维护。
 
 ```python
+from IPython.core.interactiveshell import InteractiveShell
+InteractiveShell.ast_node_interactivity = "all"
+
 admins = {'Moose', 'Joker', 'Joker'}
 moderators = {'Chris', 'Moose', 'Jane', 'Zero'}
 
-print(admins.union(moderators))
-print(admins.intersection(moderators))
-print(admins.difference(moderators))
-print(admins.symmetric_difference(moderators))
+admins.union(moderators)
+admins.intersection(moderators)
+admins.difference(moderators)
+admins.symmetric_difference(moderators)
 ```
 
     {'Chris', 'Jane', 'Joker', 'Moose', 'Zero'}
@@ -859,7 +864,7 @@ Map 是容器中的单独一类，**映射**（Map）容器。映射容器只有
 
 ```python
 phonebook = {'ann':6575, 'bob':8982, 'joe':2598, 'zoe':1225}
-print(phonebook)
+phonebook
 ```
 
 字典里的每个元素，由两部分组成，_key_（键）和 _value_（值），二者由一个冒号连接。
@@ -870,7 +875,7 @@ print(phonebook)
 
 ```python
 phonebook = {'ann':6575, 'bob':8982, 'joe':2598, 'zoe':1225}
-print(phonebook['bob'])
+phonebook['bob']
 ```
 
     8982
@@ -879,7 +884,7 @@ print(phonebook['bob'])
 
 ```python
 phonebook = {'ann':6575, 'bob':8982, 'joe':2598, 'zoe':1225, 'ann':6585}
-print(phonebook)
+phonebook
 ```
 
     {'ann': 6585, 'bob': 8982, 'joe': 2598, 'zoe': 1225}
@@ -891,10 +896,13 @@ print(phonebook)
 ### 字典的生成
 
 ```python
+from IPython.core.interactiveshell import InteractiveShell
+InteractiveShell.ast_node_interactivity = "all"
+
 aDict = {}
 bDict = {'a':1, 'b':2, 'c':3}
-print(aDict)
-print(bDict)
+aDict
+bDict
 ```
 
     {}
@@ -903,12 +911,15 @@ print(bDict)
 ### 更新某个元素
 
 ```python
+from IPython.core.interactiveshell import InteractiveShell
+InteractiveShell.ast_node_interactivity = "all"
+
 phonebook1 = {'ann':6575, 'bob':8982, 'joe':2598, 'zoe':1225, 'ann':6585}
 
-print(phonebook1['joe'])
+phonebook1['joe']
 phonebook1['joe'] = 5802
-print(phonebook1)
-print(phonebook1['joe'])
+phonebook1
+phonebook1['joe']
 ```
 
     2598
@@ -918,11 +929,14 @@ print(phonebook1['joe'])
 ### 添加元素
 
 ```python
+from IPython.core.interactiveshell import InteractiveShell
+InteractiveShell.ast_node_interactivity = "all"
+
 phonebook1 = {'ann':6575, 'bob':8982, 'joe':2598, 'zoe':1225, 'ann':6585}
 phonebook2 = {'john':9876, 'mike':5603, 'stan':6898, 'eric':7898}
 
 phonebook1.update(phonebook2)
-print(phonebook1)
+phonebook1
 ```
 
     {'ann': 6585,
@@ -937,10 +951,13 @@ print(phonebook1)
 ### 删除某个元素
 
 ```python
+from IPython.core.interactiveshell import InteractiveShell
+InteractiveShell.ast_node_interactivity = "all"
+
 phonebook1 = {'ann':6575, 'bob':8982, 'joe':2598, 'zoe':1225, 'ann':6585}
 
 del phonebook1['ann']
-print(phonebook1)
+phonebook1
 ```
 
     {'bob': 8982, 'joe': 2598, 'zoe': 1225}
@@ -950,16 +967,16 @@ print(phonebook1)
 ```python
 phonebook1 = {'ann':6575, 'bob':8982, 'joe':2598, 'zoe':1225, 'ann':6585}
 
-print('ann' in phonebook1)
+'ann' in phonebook1
 
-print(phonebook1.keys())
-print('stan' in phonebook1.keys())
+phonebook1.keys()
+'stan' in phonebook1.keys()
 
-print(phonebook1.values())
-print(1225 in phonebook1.values())
+phonebook1.values()
+1225 in phonebook1.values()
 
-print(phonebook1.items())
-print(('stan', 6898) in phonebook1.items())
+phonebook1.items()
+('stan', 6898) in phonebook1.items()
 ```
 
     True
@@ -973,18 +990,21 @@ print(('stan', 6898) in phonebook1.items())
 ### 可用来操作的内建函数
 
 ```python
+from IPython.core.interactiveshell import InteractiveShell
+InteractiveShell.ast_node_interactivity = "all"
+
 phonebook1 = {'ann':6575, 'bob':8982, 'joe':2598, 'zoe':1225, 'ann':6585}
 phonebook2 = {'john':9876, 'mike':5603, 'stan':6898, 'eric':7898}
 phonebook1.update(phonebook2)
 
-print(len(phonebook1))
-print(max(phonebook1))
-print(min(phonebook1))
-print(list(phonebook1))
-print(tuple(phonebook1))
-print(set(phonebook1))
-print(sorted(phonebook1))
-print(sorted(phonebook1, reverse=True))
+len(phonebook1)
+max(phonebook1)
+min(phonebook1)
+list(phonebook1)
+tuple(phonebook1)
+set(phonebook1)
+sorted(phonebook1)
+sorted(phonebook1, reverse=True)
 ```
 
     8
@@ -999,32 +1019,35 @@ print(sorted(phonebook1, reverse=True))
 ### 常用 Methods
 
 ```python
+from IPython.core.interactiveshell import InteractiveShell
+InteractiveShell.ast_node_interactivity = "all"
+
 phonebook1 = {'ann':6575, 'bob':8982, 'joe':2598, 'zoe':1225, 'ann':6585}
 phonebook2 = {'john':9876, 'mike':5603, 'stan':6898, 'eric':7898}
 
 phonebook3 = phonebook2.copy()
-print(phonebook3)
+phonebook3
 
 phonebook3.clear()
-print(phonebook3)
+phonebook3
 
-print(phonebook2)                      # .copy() 的 “原件” 不会发生变化
+phonebook2                      # .copy() 的 “原件” 不会发生变化
 
 p = phonebook1.popitem()
-print(p)
-print(phonebook1)
+p
+phonebook1
 
 p = phonebook1.pop('adam', 3538)
-print(p)
-print(phonebook1)
+p
+phonebook1
 
 p = phonebook1.get('adam', 3538)
-print(p)
-print(phonebook1)
+p
+phonebook1
 
 p = phonebook1.setdefault('adam', 3538)
-print(p)
-print(phonebook1)
+p
+phonebook1
 ```
 
     {'john': 9876, 'mike': 5603, 'stan': 6898, 'eric': 7898}
@@ -1071,6 +1094,7 @@ for i in [1, 2, 3]:
 s = 'Python'
 for i, c in enumerate(s):
     print(i, c)
+
 ```
 
     0 P

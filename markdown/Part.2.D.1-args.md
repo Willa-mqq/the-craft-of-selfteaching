@@ -48,6 +48,9 @@ do_nothing()
 你随时可以用以下代码查询关键字列表：
 
 ```python
+from IPython.core.interactiveshell import InteractiveShell
+InteractiveShell.ast_node_interactivity = "all"
+
 import keyword
 keyword.kwlist               # 列出所有关键字
 keyword.iskeyword('if')      # 查询某个词是不是关键字
@@ -150,10 +153,10 @@ def is_leap(year):
             leap = False
     return leap
 
-print(is_leap(7))
-print(is_leap(12))
-print(is_leap(100))
-print(is_leap(400))
+is_leap(7)
+is_leap(12)
+is_leap(100)
+is_leap(400)
 ```
 
     False
@@ -166,7 +169,7 @@ print(is_leap(400))
 # cpython/Lib/datetime.py
 def _is_leap(year):
     return year % 4 == 0 and (year % 100 != 0 or year % 400 == 0)
-print(_is_leap(300))
+_is_leap(300)
 ```
 
     False
@@ -181,7 +184,7 @@ def fib_between(start, end):
             print(a, end=' ')
         a, b = b, a + b
 
-print(fib_between(100, 10000))
+fib_between(100, 10000)
 ```
 
     144 233 377 610 987 1597 2584 4181 6765
@@ -198,7 +201,7 @@ def fib_between(start, end):
         a, b = b, a + b
     return r
 
-print(fib_between(100, 10000))
+fib_between(100, 10000)
 ```
 
     [144, 233, 377, 610, 987, 1597, 2584, 4181, 6765]
@@ -244,8 +247,8 @@ def be_careful(a, b):
 
 a = 1
 b = [1, 2, 3]
-print(be_careful(a, b))
-print(a, b)
+be_careful(a, b)
+a, b
 ```
 
     (1, ['What?!', 2, 3])
@@ -260,8 +263,8 @@ def be_careful(a, b):
 
 a = 1
 b = [1, 2, 3]
-print(be_careful(a, b))
-print(a, b)
+be_careful(a, b)
+a, b
 ```
 
     (1, [1, 2, 3])

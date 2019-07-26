@@ -13,9 +13,6 @@ Python 在这方面很用功，把函数的 “产品说明书” 当作语言�
 
 在函数定义内部，我们可以加上 **Docstring**；将来函数的 “用户” 就可以通过 `help()` 这个内建函数，或者 `.__doc__` 这个 Method 去查看这个 Docstring，即，该函数的 “产品说明书”。
 
-> [!NOTE]
-> GitPress 使用的 Python 为浏览器移植版，与计算机本地运行的版本有一定的差异，因此运行本章代码时，输出也会不同。
-
 先看一个 Docstring 以及如何查看某个函数的 Docstring 的例子：
 
 ```python
@@ -34,7 +31,7 @@ def is_prime(n):
     else:
         return True
 
-print(help(is_prime))
+help(is_prime)
 print(is_prime.__doc__)
 is_prime.__doc__
 ```
@@ -66,7 +63,7 @@ def is_prime(n):
     else:
         return True
 
-print(help(is_prime))
+help(is_prime)
 print(is_prime.__doc__)
 is_prime.__doc__
 ```
@@ -98,7 +95,7 @@ def is_prime(n):
     whether the argument n is a prime number.
     """
 
-print(help(is_prime))
+help(is_prime)
 print(is_prime.__doc__)
 is_prime.__doc__
 ```
@@ -168,7 +165,7 @@ class Vehicle(object):
         '''
         pass
 
-print(help(Vehicle))
+help(Vehicle)
 ```
 
     Help on class Vehicle in module __main__:
